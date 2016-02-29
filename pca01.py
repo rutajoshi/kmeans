@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-__author__ = 'dtalessi'
+__author__ = 'mmalessi'
 
-from sklearn.cluster import KMeans
-from sklearn import cluster
+import numpy as np
+from sklearn.decomposition import PCA
 import sys
 from numpy import vstack
 from scipy import sparse
@@ -17,15 +17,15 @@ def parse_file(file_name):
         matrix.append(line)
         print(len(line))
     matrix = sparse.hstack(matrix)
-    return matrix.todense()
+    return matrix.toarray()
 
 
 
 def main(input_file):
     matrix = parse_file(input_file)
-    k_means = cluster.KMeans()
-    k_means.fit(matrix)
-
+    pca = PCA(n_components=2)
+    pca.fit(matrix)
+    print(pca.explained_variance_ratio_)
 
 if __name__ == '__main__':
     main(*sys.argv[1:])
