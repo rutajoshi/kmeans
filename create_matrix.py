@@ -17,7 +17,7 @@ def parse_file(file_name):
         matrix.append(line)
         print(len(line))
     matrix = sparse.hstack(matrix)
-    return matrix.todense()
+    return matrix
 
 
 

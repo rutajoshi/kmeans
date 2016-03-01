@@ -22,6 +22,9 @@ def process(input_file, unique_names):
             name_record = []        # reset name record
         name_record.append(name)
         activity_sequence[name] += [activity]
+    inactive_users = unique_names.difference(name_record)  # users that didn't participate in this time interval
+    for user in inactive_users:
+        activity_sequence[user] += ["0"]
     infile.close()
     return activity_sequence
 
@@ -42,7 +45,6 @@ def create_output_file(activity_sequence, unique_names):
     for name in unique_names:
         seq = activity_sequence[name]
         seq = "\t".join(seq)
-        print(len(seq))
         outfile.write(seq + "\n")
     outfile.close()
 
