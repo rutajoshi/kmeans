@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-__author__ = 'dtalessi'
+__author__ = 'mmalessi'
 
 from sklearn.cluster import KMeans
 from sklearn import cluster
