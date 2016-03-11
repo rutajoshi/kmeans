@@ -16,7 +16,7 @@ def parse_file(file_name):
         line = line.strip().split('\t')
         line = [int(i) for i in line]
         matrix.append(line)
-        print(len(line))
+        #print(len(line))
     #matrix = sparse.hstack(matrix)
     matrix = np.array(matrix)
     return matrix
@@ -25,10 +25,19 @@ def parse_file(file_name):
 
 def main(input_file):
     matrix = parse_file(input_file)
-    clusterid, error, nfound = kcluster(matrix, nclusters=2) #change number of clusters
-    clusterid = [str(i) for i in clusterid]
+    clusterid, error, nfound = kcluster(matrix, nclusters=5) #change number of clusters
+    clusternums = clusterid
+    clusterid = [str(i) for i in clusternums]
+    counts = {}
+    for i in clusternums:
+        if "Cluster " + str(i) not in counts:
+            counts["Cluster " + str(i)] = 1;
+        else:
+            counts["Cluster " + str(i)] += 1
     clusters_as_string = "\n".join(clusterid)
     print(clusters_as_string)
+    for c in counts:
+        print(c + " = " + str(counts[c]))
 
     # k_means = cluster.KMeans()
     # answer = k_means.fit(matrix)
@@ -44,7 +53,3 @@ def main(input_file):
 
 if __name__ == '__main__':
     main(*sys.argv[1:])
-
-
-
-
