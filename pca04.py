@@ -43,7 +43,7 @@ def print_top_genes(components, pc_num=0, num_genes=10):
     print("Top genes (PC" + str(pc_num) + "):")
     for i in range(0, num_genes):
         top_gene_index = pc_abs.pop()[0]
-        print(top_gene_index + ": " + str(pc[top_gene_index]))
+        print(str(top_gene_index) + ": " + str(pc[top_gene_index]))
 
 
 if __name__ == '__main__':
