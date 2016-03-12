@@ -21,11 +21,8 @@ def parse_file(file_name):
     matrix = np.array(matrix)
     return matrix
 
-
-
-def main(input_file):
-    matrix = parse_file(input_file)
-    clusterid, error, nfound = kcluster(matrix, nclusters=5) #change number of clusters
+def run_kmeans(matrix, k):
+    clusterid, error, nfound = kcluster(matrix, nclusters=k) #change number of clusters
     clusternums = clusterid
     clusterid = [str(i) for i in clusternums]
     counts = {}
@@ -35,9 +32,23 @@ def main(input_file):
         else:
             counts["Cluster " + str(i)] += 1
     clusters_as_string = "\n".join(clusterid)
-    print(clusters_as_string)
+    #print(clusters_as_string)
+    binvals = []
     for c in counts:
         print(c + " = " + str(counts[c]))
+        binvals.append(counts[c])
+    print("variance = ", np.var(binvals))
+
+
+def main(input_file):
+    m = parse_file(input_file)
+    for i in range(1, 16):
+        print("Running kmeans with " , i, " clusters")
+        run_kmeans(m, i)
+        print("\n")
+
+
+
 
     # k_means = cluster.KMeans()
     # answer = k_means.fit(matrix)
